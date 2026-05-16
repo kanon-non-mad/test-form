@@ -6,7 +6,7 @@
 
 <div class="contact-form__content">
     <h1 class="contact-title">Login</h1>
-    <form class="form" method="POST" action="{{route('login')}}">
+    <form class="form" method="POST" action="{{route('login.store')}}">
         @csrf
         
         <div class="contact-form__group">

@@ -10,7 +10,7 @@
 <body>
     <div class="thanks-box">
         <h1>お問い合わせありがとうございました</h1>
-        <a class="home-button" href="{{route('contacts.index')}}">HOME</a>
+        <a class="home-button" href="{{route('contact.form')}}">HOME</a>
     </div>
 </body>
 </html>

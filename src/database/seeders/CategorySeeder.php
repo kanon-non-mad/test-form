@@ -25,7 +25,7 @@ class CategorySeeder extends Seeder
 
     // 通常の seed 処理（例：factory でレコードを作成）
         $categories =[
-            ['content' => '商品のお届について'],
+            ['content' => '商品のお届けについて'],
             ['content' => '商品の交換について'],
             ['content' => '商品トラブル'],
             ['content' => 'ショップへのお問い合わせ'],

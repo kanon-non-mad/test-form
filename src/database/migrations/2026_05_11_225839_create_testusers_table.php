@@ -13,11 +13,12 @@ class CreateTestusersTable extends Migration
      */
     public function up()
     {
-        Schema::create('testusers', function (Blueprint $table) {
+        Schema::create('test_users', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->string('email',255);
+            $table->string('email',255)->unique();
             $table->string('password',255);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTestusersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testusers');
+        Schema::dropIfExists('test_users');
     }
 }

@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <a class="header__logo" href="{{route('contacts.index')}}">FashionablyLate</a>
+            <a class="header__logo" href="{{route('contact.form')}}">FashionablyLate</a>
         </div>
     </header>
 

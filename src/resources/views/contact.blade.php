@@ -6,10 +6,10 @@
 
 <div class="contact-form__content">
     <h1 class="contact-title">Contact</h1>
-    <form class="form" method="POST" action="{{route('contacts.store')}}">
+    <form class="form" method="POST" action="{{route('contact.confirm')}}">
         @csrf
         <div class="contact-form__group">
-            <label class="contact-name">お名前<span class="required">必須</span></label>
+            <label class="contact-name" for="name">お名前<span class="required">必須</span></label>
             <div class="name-fields">
                 <input type="text" name="first_name" placeholder="例：山田" required>
                 <input type="text" name="last_name" placeholder="例：太郎" required>
@@ -48,13 +48,11 @@
         </div>
         <div class="contact-form__group">
             <label for="type">お問い合わせの種類</label>
-            <select id="type" name="type" placeholder="選択してください">
-                <option value="" selected>選択してください</option>
-                <option value="1">商品のお届について</option>
-                <option value="2">商品の交換について</option>
-                <option value="3">商品トラブル</option>
-                <option value="4">ショップへのお問い合わせ</option>
-                <option value="5">その他</option>
+            <select id="category_id" name="category_id">
+                <option value="">選択してください</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->content}}</option>
+                @endforeach
             </select>
         </div>
         <div class="contact-form__group">
