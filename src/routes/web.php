@@ -44,8 +44,6 @@ Route::post('/logout',[AuthorController::class,'logout'])->middleware('auth')
 Route::middleware('auth')->prefix('admin')->group(function(){
     //表示・検索
     Route::get('/',[AdminController::class,'admin'])->name('admin');
-    //CSV出力
-    Route::get('/export-csv',[AdminController::class, 'exportCsv'])->name('admin.export-csv');
     //モーダル表示
     Route::get('/{contact}', [AdminController::class, 'detail'])->name('admin.detail');
     //リセット

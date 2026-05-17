@@ -9,7 +9,7 @@
         <h1 class="admin-title">Admin</h1>
         <form class="logout" method="POST" action="{{route('logout')}}">
         @csrf
-            <button class="login-button" href="{{route('logout')}}">logout</button>
+            <button class="login-button" type="submit">logout</button>
         </form>
     </div>
     <form class="form" method="GET" action="{{route('admin')}}">
@@ -54,21 +54,95 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($contacts as $contact)
-            <tr class="admin-table__content">
-                <td class="admin-table__border">{{$contact->first_name}}
-                {{$contact->last_name}}
-                </td>
-                <td class="admin-table__border">
-                    @if($contact['gender'] == 1) 男性
-                    @elseif($contact['gender'] == 2) 女性
-                    @else
-                    その他
-                    @endif
-                </td>
-                <td class="admin-table__border">{{$contact->email}}</td>
-                <td class="admin-table__border">{{$contact->category->content}}</td>
-            </tr>
+        @foreach($contacts as $contact)
+        <tr class="admin-table__content">
+            <td class="admin-table__border">{{$contact->first_name}}
+            {{$contact->last_name}}
+            </td>
+            <td class="admin-table__border">
+                @if($contact['gender'] == 1) 男性
+                @elseif($contact['gender'] == 2) 女性
+                @else
+                その他
+                @endif
+            </td>
+            <td class="admin-table__border">{{$contact->email}}</td>
+            <td class="admin-table__border">{{$contact->category->content}}</td>
+            <td class="admin-table__border">
+            <button class="admin__modal" type="button" onclick="openModal({{$contact->id}})">詳細</button>
+            </td>
+        </div>    
+        </tr>
+        <div class="admin__modal-content" id="modal-{{$contact->id}}">
+            <div class="modal-content">
+                <button class="modal-close" type="button" onclick="closeModal({{$contact->id}})">
+                    ×
+                </button>
+                <table class="modal__content">
+                    <tr class="modal-inner">
+                        <th class="modal-title">お名前</th>
+                        <td class="modal-data">
+                            {{$contact['first_name']}}
+                            {{$contact['last_name']}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">性別</th>
+                        <td class="modal-data">
+                            @if($contact['gender'] == 1) 男性
+                            @elseif($contact['gender'] == 2) 女性
+                            @else
+                            その他
+                            @endif
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">メールアドレス</th>
+                        <td class="modal-data">
+                            {{$contact['email']}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">電話番号</th>
+                        <td class="modal-data">
+                            {{$contact['tel']}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">住所</th>
+                        <td class="modal-data">
+                            {{$contact['address']}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">建物名</th>
+                        <td class="modal-data">
+                            {{$contact['building']}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">お問い合わせの種類</th>
+                        <td class="modal-data">
+                            {{$contact->category->content}}
+                        </td>
+                    </tr>
+                    <tr class="modal-inner">
+                        <th class="modal-title">お問い合わせ内容</th>
+                        <td class="modal-data">
+                            {{$contact['detail']}}
+                         </td>
+                    </tr>
+                </table>
+                <form class="delete-form" 
+                action="{{route('admin.destroy',$contact)}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <input type="hidden" name="id" value="{{$contact['id']}}">
+                    <button class="modal-delete">削除
+                    </button>
+                </form>
+            </div>
+        </div>
             @endforeach
         </tbody>
         </table>
@@ -76,4 +150,17 @@
     </div>
 </div>
 
+<script>
+    function openModal(id)
+    {
+        document.getElementById('modal-' + id)
+        .style.display = 'block';
+    }
+
+    function closeModal(id)
+    {
+       document.getElementById('modal-' + id)
+        .style.display = 'none'; 
+    }
+    </script>
 @endsection
